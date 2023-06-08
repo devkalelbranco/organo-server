@@ -36,6 +36,10 @@ public class Employee {
         this.team = team;
     }
 
+    public Employee(UUID id){
+        this.id = id;
+    }
     public Employee(){}
+
 
 }

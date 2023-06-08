@@ -2,6 +2,8 @@ package br.com.kalel.organoserver.controller;
 
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,9 +35,11 @@ public class EmployeeController {
         return this.repository.save(employee);
     }
 
-    @DeleteMapping("")
-    public void removeEmployee(@PathVariable UUID id){
-        this.repository.delete(this.repository.findById(id).get());
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Employee> removeEmployee(@PathVariable UUID id){
+        Employee emp = new Employee(id);
+        this.repository.deleteById(id);
+        return new ResponseEntity<Employee>(emp, HttpStatus.OK);
     }
 
 }
